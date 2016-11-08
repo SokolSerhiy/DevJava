@@ -11,13 +11,13 @@ public class Main {
 			double rand = Math.random();
 			switch (way) {
 			case 0:
-				array[i] = (char) Math.round(rand * (91 - 65) + 65);
+				array[i] = (char) Math.round(rand * (90 - 65) + 65);
 				break;
 			case 1:
-				array[i] = (char) Math.round(rand * (123 - 97) + 97);
+				array[i] = (char) Math.round(rand * (122 - 97) + 97);
 				break;
 			case 2:
-				array[i] = (char) Math.round(rand * (58 - 48) + 48);
+				array[i] = (char) Math.round(rand * (57 - 48) + 48);
 				break;
 			}
 		}
