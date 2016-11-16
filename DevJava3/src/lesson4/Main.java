@@ -41,11 +41,11 @@ public class Main {
 		a = a + 5;
 	}
 	
-	static int random(int min, int max){
+	public static int random(int min, int max){
 		return (int) Math.round(Math.random()*(max-min)+min);
 	}
 	
-	static void print(int[] array){
+	public static void print(int[] array){
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i]+" ");
 		}
@@ -58,7 +58,7 @@ public class Main {
 		}
 	}
 	
-	static void addRandom(int[] array, int min, int max){
+	public static void addRandom(int[] array, int min, int max){
 		for (int i = 0; i < array.length; i++) {
 			array[i] = random(min, max);
 		}
