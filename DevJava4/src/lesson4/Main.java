@@ -38,7 +38,7 @@ public class Main {
 		a = a + 5;
 	}
 	
-	static int random(int min, int max){
+	public static int random(int min, int max){
 		return (int) Math.round(Math.random()*(max-min)+min);
 	}
 	
