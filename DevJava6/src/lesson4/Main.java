@@ -34,7 +34,7 @@ public class Main {
 		print(array);
 		int[] array1 = create(10, 1, 20);
 		print(array1);
-		array1 = increase(array1, -3);
+		array1 = increase(array1, 3);
 		print(array1);
 	}
 	
