@@ -2,26 +2,57 @@ package core.less3;
 
 public class Human {
 
-	String name;
+	private String name;
 	
-	int age;
+	private int age;
 	
-	Human(int age, String name){
+	private static int count;
+	
+	public static final int ASDF_TY = 1;
+	
+	public Human(int age, String name){
 		this(name);
-		this.age = age;
+		setAge(age);
 	}
 	
-	Human(String name){
+	public Human(String name){
 		this();
 		this.name = name;
 	}
 	
-	Human(){
+	public Human(){
+		count++;
+		print();
 		System.out.println("I was born");
 	}
 	
-	void run(){
+	public static void countOfPeople(){
+		System.out.println("count = "+count);
+	}
+	
+	public void run(){
 		System.out.println(name+": go-go-go");
+	}
+	
+	private void print(){
+		System.out.println("Hello");
+	}
+	
+	public final String getName(){
+		return name;
+	}
+	
+	public final int getAge(){
+		return age;
+	}
+	
+	public final void setName(String name){
+		this.name = name;
+	}
+	
+	public final void setAge(int age){
+		if(age<0)age=0;
+		this.age = age;
 	}
 	
 	public String toString(){

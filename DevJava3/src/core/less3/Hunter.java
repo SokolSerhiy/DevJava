@@ -2,39 +2,43 @@ package core.less3;
 
 public class Hunter extends Human{
 	
-	int killedMammonts;
+	private int killedMammonts;
 
-	Hunter(int age, String name){
+	public Hunter(int age, String name){
 		super(age, name);
 	}
 	
-	void eatMeat(String meat){
-		System.out.println(name+": mmm nyam-nyam "+meat);
+	public void eatMeat(String meat){
+		System.out.println(getName()+": mmm nyam-nyam "+meat);
 	}
 	
-	void eatMeat(){
+	public void eatMeat(){
 		int kill = 0;
 		while(kill<=10){
 			run();
 			int tmp = random(0, 10);
 			kill += tmp;
-			System.out.println(name+": I kill only "+tmp+ " mammonts");
+			System.out.println(getName()+": I kill only "+tmp+ " mammonts");
 		}
 		killedMammonts+=kill;
-		System.out.println(name+": I kill "+killedMammonts+" mammonts");
+		System.out.println(getName()+": I kill "+killedMammonts+" mammonts");
 		eatMeat("mammont meat");
 	}
 	
-	int random(int min, int max){
+	private int random(int min, int max){
 		return (int) Math.round(Math.random()*(max-min)+min);
 	}
 	
+	private void print(){
+		System.out.println("Hello hunter");
+	}
+	
 	@Override
-	void run(){
-		System.out.println(name+": faster go-go-go");
+	public void run(){
+		System.out.println(getName()+": faster go-go-go");
 	}
 	
 	public String toString(){
-		return "Hunter [age="+age+", name="+name+", killedMammonts="+killedMammonts+"]";
+		return "Hunter [age="+getAge()+", name="+getName()+", killedMammonts="+killedMammonts+"]";
 	}
 }
