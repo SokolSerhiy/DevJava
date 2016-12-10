@@ -1,7 +1,7 @@
 package core.less10;
 
-import static java.util.Comparator.*;
-import static java.util.stream.Collectors.toList;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 
 import java.util.ArrayList;
 import java.util.List;
