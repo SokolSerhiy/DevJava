@@ -22,6 +22,6 @@ public class Main {
 	}
 	
 	static void kapec(){
-		throw new MyException();
+		throw new MyException("mdsfhjhdg");
 	}
 }

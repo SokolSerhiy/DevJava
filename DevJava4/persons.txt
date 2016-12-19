@@ -1,0 +1,10 @@
+Ivan 18 MALE
+Petro 26 MALE
+Mykola 19 MALE
+Artem 36 MALE
+Petro 28 MALE
+Mykola 48 MALE
+Petro 41 MALE
+Mykola 21 MALE
+Artem 54 MALE
+Mykola 69 MALE

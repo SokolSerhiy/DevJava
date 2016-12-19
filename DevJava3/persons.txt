@@ -1,0 +1,7 @@
+Ivan 18 MALE
+Petro 25 MALE
+Mykola 28 MALE
+Artem 25 MALE
+Ivanka 18 FEMALE
+Vasyl 36 MALE
+Petro 35 MALE

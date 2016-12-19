@@ -1,6 +1,10 @@
 package core.less6;
 
-public class Person implements Comparable<Person>{
+import java.io.Serializable;
+
+public class Person implements Comparable<Person>, Serializable{
+
+	private static final long serialVersionUID = -4397348609784566997L;
 
 	private String name;
 	
