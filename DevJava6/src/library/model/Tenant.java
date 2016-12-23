@@ -2,7 +2,7 @@ package library.model;
 
 import java.io.Serializable;
 
-public interface Tenan extends Serializable{
+public interface Tenant extends Serializable{
 
 	String getId();
 }

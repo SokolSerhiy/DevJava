@@ -4,7 +4,7 @@ public class Book implements Tenancy{
 
 	private static final long serialVersionUID = -4578584838671427294L;
 
-	private transient String id;
+	private String id;
 	
 	private String title;
 	
@@ -19,7 +19,7 @@ public class Book implements Tenancy{
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;

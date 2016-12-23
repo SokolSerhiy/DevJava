@@ -1,10 +1,10 @@
 package library.model;
 
-public class User implements Tenan{
+public class User implements Tenant{
 
-	private static final long serialVersionUID = -2090766215463250815L;
+	private static final long serialVersionUID = 7896403905840705371L;
 
-	private transient String id;
+	private String id;
 	
 	private String name;
 	

@@ -7,7 +7,7 @@ public class Rent implements Serializable{
 
 	private static final long serialVersionUID = -5891772138900514532L;
 
-	private Tenan tenan;
+	private Tenant tenant;
 	
 	private Tenancy tenancy;
 	
@@ -15,12 +15,12 @@ public class Rent implements Serializable{
 	
 	private LocalDate end;
 
-	public Tenan getTenan() {
-		return tenan;
+	public Tenant getTenant() {
+		return tenant;
 	}
 
-	public void setTenan(Tenan tenan) {
-		this.tenan = tenan;
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
 	}
 
 	public Tenancy getTenancy() {

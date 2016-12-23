@@ -8,7 +8,7 @@ public interface TenancyDao {
 
 	void save(Tenancy tenancy);
 	
-	void upadate(Tenancy tenancy);
+	void update(Tenancy tenancy);
 	
 	void delete(Tenancy tenancy);
 	

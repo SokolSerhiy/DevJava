@@ -4,7 +4,7 @@ public class User implements Tenant{
 
 	private static final long serialVersionUID = 7896403905840705371L;
 
-	private transient String id;
+	private String id;
 	
 	private String name;
 	

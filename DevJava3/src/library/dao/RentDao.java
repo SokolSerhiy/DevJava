@@ -10,15 +10,11 @@ public interface RentDao {
 
 	void save(Rent rent);
 	
-	void update(Rent rent);
-	
-	void delete(Rent rent);
-	
-	Rent findOne(String id);
+	void returnRent(Tenant tenant, Tenancy tenancy);
 	
 	List<Rent> findAll();
 	
-	List<Rent> findByTenant(Tenant tenant);
+	List<Rent> findAll(Tenant tenant);
 	
-	List<Rent> findByTenancy(Tenancy tenancy);
+	List<Rent> findAll(Tenancy tenancy);
 }
