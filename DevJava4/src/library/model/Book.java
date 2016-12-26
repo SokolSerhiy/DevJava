@@ -24,4 +24,9 @@ public class Book implements Tenancy{
 	public String getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + "]";
+	}
 }

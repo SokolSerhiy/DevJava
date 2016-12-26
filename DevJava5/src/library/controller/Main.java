@@ -7,6 +7,9 @@ import java.util.UUID;
 import library.dao.RentDao;
 import library.dao.TenancyDao;
 import library.dao.TenantDao;
+import library.dao.impl.RentDaoBfImpl;
+import library.dao.impl.TenancyDaoBfImpl;
+import library.dao.impl.TenantDaoBfImpl;
 import library.model.Book;
 import library.model.Rent;
 import library.model.Tenancy;
@@ -15,11 +18,11 @@ import library.model.User;
 
 public class Main {
 
-	private static TenancyDao tenancyDao;
+	private static TenancyDao tenancyDao = new TenancyDaoBfImpl();
 
-	private static TenantDao tenantDao;
+	private static TenantDao tenantDao = new TenantDaoBfImpl();
 
-	private static RentDao rentDao;
+	private static RentDao rentDao = new RentDaoBfImpl();
 
 	private static final Scanner sc = new Scanner(System.in);
 

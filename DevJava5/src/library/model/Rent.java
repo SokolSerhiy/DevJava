@@ -46,4 +46,10 @@ public class Rent implements Serializable{
 	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
+
+	@Override
+	public String toString() {
+		return "Rent [tenant=" + tenant + ", tenancy=" + tenancy + ", start="
+				+ start + ", end=" + end + "]";
+	}
 }
