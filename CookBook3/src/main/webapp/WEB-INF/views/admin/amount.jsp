@@ -39,9 +39,9 @@
     					</div>
   					</div>
 					<div class="form-group">
-    					<label for="name" class="col-sm-2 control-label">Amount</label>
+    					<label for="amount" class="col-sm-2 control-label">Amount</label>
     					<div class="col-sm-10">
-      						<input type="text" class="form-control" name="amount" id="name">
+      						<input type="text" class="form-control" name="amount" id="amount">
     					</div>
   					</div>
   					<div class="form-group">
@@ -56,7 +56,7 @@
   					</div>
   					<div class="form-group">
     					<div class="col-sm-offset-2 col-sm-10">
-      						<button type="submit" class="btn btn-primary">Create</button>
+      						<button type="submit" class="btn btn-default">Create</button>
     					</div>
   					</div>
 				</form>
@@ -64,7 +64,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3 col-xs-3"><h3>Amount</h3></div>
-			<div class="col-md-3 col-xs-3"><h3>Measuring System</h3></div>
+			<div class="col-md-3 col-xs-3"><h3>Measuring system</h3></div>
 			<div class="col-md-3 col-xs-3"><h3>Ingredient</h3></div>
 			<div class="col-md-3 col-xs-3"><h3>Options</h3></div>
 		</div>
