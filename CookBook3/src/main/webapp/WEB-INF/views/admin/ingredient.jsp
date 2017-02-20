@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="жарена_картопля"%>
 <div class="row">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -28,11 +28,11 @@
 	<div class="col-md-7 col-xs-12">
 		<div class="row">
 			<div class="col-md-12 col-xs-12">
-				<жарена_картопля:form class="form-horizontal" action="/admin/ingredient" method="POST" modelAttribute="ingredient">
+				<form:form class="form-horizontal" action="/admin/ingredient" method="POST" modelAttribute="ingredient">
 					<div class="form-group">
     					<label for="name" class="col-sm-2 control-label">Name</label>
     					<div class="col-sm-10">
-      						<жарена_картопля:input class="form-control" path="name" id="name"/>
+      						<form:input class="form-control" path="name" id="name"/>
     					</div>
   					</div>
   					<div class="form-group">
@@ -40,7 +40,7 @@
       						<button type="submit" class="btn btn-default">Create</button>
     					</div>
   					</div>
-				</жарена_картопля:form>
+				</form:form>
 			</div>
 		</div>
 		<div class="row">
@@ -55,7 +55,5 @@
 					<div class="col-md-4 col-xs-4"><a class="btn btn-danger" href="/admin/ingredient/delete/${ingredient.id}">delete</a></div>
 				</div>
 			</c:forEach>
-	</div>
-	<div class="col-md-2 col-xs-12">
 	</div>
 </div>
