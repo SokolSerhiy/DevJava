@@ -38,7 +38,7 @@
 					<div class="form-group">
     					<label for="amount" class="col-sm-2 control-label">Amount</label>
     					<div class="col-sm-10">
-      						<input type="text" class="form-control" name="amount" id="amount">
+      						<form:input type="text" class="form-control" path="amount" id="amount"/>
     					</div>
   					</div>
   					<div class="form-group">
