@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import ua.editor.IngredientEditor;
 import ua.editor.MeasuringSystemEditor;
@@ -67,8 +68,9 @@ public class AmountController {
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("amount") Amount amount){
+	public String save(@ModelAttribute("amount") Amount amount, SessionStatus status){
 		amountService.save(amount);
+		status.setComplete();
 		return "redirect:/admin/amount";
 	}
 	
