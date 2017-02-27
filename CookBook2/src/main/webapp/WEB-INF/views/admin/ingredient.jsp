@@ -30,6 +30,9 @@
 			<div class="col-md-12 col-xs-12">
 				<жарена_картопля:form class="form-horizontal" action="/admin/ingredient" method="POST" modelAttribute="ingredient">
 					<div class="form-group">
+						<label style="color:red;text-align:left;" for="name" class="col-sm-10 col-sm-offset-2 control-label"><жарена_картопля:errors path="name"/></label>
+					</div>
+					<div class="form-group">
     					<label for="name" class="col-sm-2 control-label">Name</label>
     					<div class="col-sm-10">
       						<жарена_картопля:input class="form-control" path="name" id="name"/>
