@@ -79,3 +79,9 @@
 	</div>
 	<div class="col-md-2 col-xs-12"></div>
 </div>
+<script>
+	$('label').each(function(){
+		if(!$(this).html()) $(this).parent().hide();
+	});
+	
+</script>
