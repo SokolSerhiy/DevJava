@@ -1,8 +1,11 @@
 package ua.controller.admin;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -13,14 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import ua.dto.form.AmountForm;
 import ua.editor.IngredientEditor;
 import ua.editor.MeasuringSystemEditor;
-import ua.entity.Amount;
 import ua.entity.Ingredient;
 import ua.entity.MeasuringSystem;
 import ua.service.AmountService;
 import ua.service.IngredientService;
 import ua.service.MeasuringSystemService;
+import ua.validator.AmountValidator;
 
 @Controller
 @RequestMapping("/admin/amount")
@@ -40,11 +44,12 @@ public class AmountController {
 	protected void bind(WebDataBinder binder){
 		binder.registerCustomEditor(Ingredient.class, new IngredientEditor(ingredientService));
 		binder.registerCustomEditor(MeasuringSystem.class, new MeasuringSystemEditor(measuringSystemService));
+		binder.setValidator(new AmountValidator(amountService));
 	}
 	
 	@ModelAttribute("amount")
-	public Amount getForm(){
-		return new Amount();
+	public AmountForm getForm(){
+		return new AmountForm();
 	}
 	
 	@GetMapping
@@ -63,12 +68,13 @@ public class AmountController {
 	
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable Long id, Model model){
-		model.addAttribute("amount", amountService.findOne(id));
+		model.addAttribute("amount", amountService.findForm(id));
 		return show(model);
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("amount") Amount amount, SessionStatus status){
+	public String save(@ModelAttribute("amount") @Valid AmountForm amount,BindingResult br, Model model, SessionStatus status){
+		if(br.hasErrors()) return show(model);
 		amountService.save(amount);
 		status.setComplete();
 		return "redirect:/admin/amount";

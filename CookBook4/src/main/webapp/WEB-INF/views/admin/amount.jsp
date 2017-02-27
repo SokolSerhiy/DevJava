@@ -30,11 +30,17 @@
 			<div class="col-md-12 col-xs-12">
 				<form:form class="form-horizontal" action="/admin/amount" method="POST" modelAttribute="amount">
 					<div class="form-group">
+						<label for="ingredient" style="color:red;text-align:left;" class="col-sm-offset-2 col-sm-10 control-label"><form:errors path="ingredient"/></label>
+					</div>
+					<div class="form-group">
     					<label for="ingredient" class="col-sm-2 control-label">Ingredient</label>
     					<div class="col-sm-10">
       						<form:select class="form-control" path="ingredient" id="ingredient" items="${ingredients}" itemValue="id" itemLabel="name"/>
     					</div>
   					</div>
+  					<div class="form-group">
+						<label for="amount" style="color:red;text-align:left;" class="col-sm-offset-2 col-sm-10 control-label"><form:errors path="amount"/></label>
+					</div>
 					<div class="form-group">
     					<label for="amount" class="col-sm-2 control-label">Amount</label>
     					<div class="col-sm-10">
@@ -73,3 +79,8 @@
 	</div>
 	<div class="col-md-2 col-xs-12"></div>
 </div>
+<script>
+	$('label').each(function() {
+		if(!$(this).html()) $(this).parent('div').hide();
+	});
+</script>
