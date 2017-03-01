@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
-@Table(name="recipe")
+@Table(name="recipe", indexes={@Index(columnList = "time, title"),
+		@Index(columnList = "time"), @Index(columnList = "title")})
 public class Recipe extends AbstractEntity{
 	
 	private String title;
