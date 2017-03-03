@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.dto.form.AmountForm;
@@ -11,7 +13,7 @@ import ua.entity.Amount;
 import ua.entity.Ingredient;
 import ua.entity.MeasuringSystem;
 import ua.repository.AmountRepository;
-import ua.service.AmountService;
+import ua.service.AmountService; 
 
 @Service
 public class AmountServiceImpl implements AmountService{
@@ -59,6 +61,11 @@ public class AmountServiceImpl implements AmountService{
 	public Amount findUnique(String amount, Ingredient ingredient,
 			MeasuringSystem system) {
 		return amountRepository.findUnique(new BigDecimal(amount.replace(',', '.')), ingredient.getId(), system.getId());
+	}
+
+	@Override
+	public Page<Amount> findAll(Pageable pageable) {
+		return amountRepository.findAll(pageable);
 	}
 
 }
