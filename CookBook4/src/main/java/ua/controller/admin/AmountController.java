@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class AmountController {
 	}
 	
 	@GetMapping
-	public String show(Model model, @PageableDefault Pageable pageable){
+	public String show(Model model, @PageableDefault(direction=Sort.Direction.DESC, sort="id") Pageable pageable){
 		model.addAttribute("page", amountService.findAll(pageable));
 		model.addAttribute("measuringSystems", measuringSystemService.findAll());
 		model.addAttribute("ingredients", ingredientService.findAll());
@@ -63,19 +64,19 @@ public class AmountController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id, @PageableDefault Pageable pageable){
+	public String delete(@PathVariable Long id, @PageableDefault(direction=Sort.Direction.DESC, sort="id") Pageable pageable){
 		amountService.delete(id);
 		return "redirect:/admin/amount"+getParams(pageable);
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+	public String update(@PathVariable Long id, Model model, @PageableDefault(direction=Sort.Direction.DESC, sort="id") Pageable pageable){
 		model.addAttribute("amount", amountService.findForm(id));
 		return show(model, pageable);
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("amount") @Valid AmountForm amount,BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable){
+	public String save(@ModelAttribute("amount") @Valid AmountForm amount,BindingResult br, Model model, SessionStatus status, @PageableDefault(direction=Sort.Direction.DESC, sort="id") Pageable pageable){
 		if(br.hasErrors()) return show(model, pageable);
 		amountService.save(amount);
 		status.setComplete();
