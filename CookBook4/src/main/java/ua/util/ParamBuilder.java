@@ -4,6 +4,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
+import ua.dto.filter.SimpleFilter;
+
 public interface ParamBuilder {
 
 	public static String getParams(Pageable pageable){
@@ -21,6 +23,14 @@ public interface ParamBuilder {
 				buffer.append(",desc");
 			});
 		}
+		return buffer.toString();
+	}
+	
+	public static String getParams(Pageable pageable, SimpleFilter filter){
+		if(filter.getSearch().isEmpty()) getParams(pageable);
+		StringBuilder buffer = new StringBuilder(getParams(pageable));
+		buffer.append("&search=");
+		buffer.append(filter.getSearch());
 		return buffer.toString();
 	}
 }

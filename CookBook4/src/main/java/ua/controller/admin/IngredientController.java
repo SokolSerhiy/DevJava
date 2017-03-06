@@ -3,6 +3,8 @@ package ua.controller.admin;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import ua.dto.filter.SimpleFilter;
 import ua.entity.Ingredient;
 import ua.service.IngredientService;
 import ua.validator.IngredientValidator;
-
+import static ua.util.ParamBuilder.*;
 @Controller
 @RequestMapping("/admin/ingredient")
 @SessionAttributes("ingredient")
@@ -38,29 +41,34 @@ public class IngredientController {
 		return new Ingredient();
 	}
 	
+	@ModelAttribute("filter")
+	public SimpleFilter getFilter(){
+		return new SimpleFilter();
+	}
+	
 	@GetMapping
-	public String show(Model model){
-		model.addAttribute("ingredients", ingredientService.findAll());
+	public String show(Model model, @PageableDefault Pageable pageable, @ModelAttribute("filter") SimpleFilter filter){
+		model.addAttribute("page", ingredientService.findAll(pageable, filter));
 		return "admin-ingredient";
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Long id, Model model){
+	public String update(@PathVariable Long id, Model model, @PageableDefault Pageable pageable, @ModelAttribute("filter") SimpleFilter filter){
 		model.addAttribute("ingredient", ingredientService.findOne(id));
-		return show(model);
+		return show(model, pageable, filter);
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id){
+	public String delete(@PathVariable Long id, @PageableDefault Pageable pageable, @ModelAttribute("filter") SimpleFilter filter){
 		ingredientService.delete(id);
-		return "redirect:/admin/ingredient";
+		return "redirect:/admin/ingredient"+getParams(pageable, filter);
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("ingredient") @Valid Ingredient ingredient, BindingResult br, Model model, SessionStatus status){
-		if(br.hasErrors()) return show(model);
+	public String save(@ModelAttribute("ingredient") @Valid Ingredient ingredient, BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable, @ModelAttribute("filter") SimpleFilter filter){
+		if(br.hasErrors()) return show(model, pageable, filter);
 		ingredientService.save(ingredient);
 		status.setComplete();
-		return "redirect:/admin/ingredient";
+		return "redirect:/admin/ingredient"+getParams(pageable, filter);
 	}
 }

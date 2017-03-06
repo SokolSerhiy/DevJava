@@ -3,8 +3,12 @@ package ua.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import ua.dto.filter.SimpleFilter;
 import ua.entity.Ingredient;
 import ua.repository.IngredientRepository;
 import ua.service.IngredientService;
@@ -40,4 +44,15 @@ public class IngredientServiceImpl implements IngredientService{
 		return ingredientRepository.findByName(name);
 	}
 
+	@Override
+	public Page<Ingredient> findAll(Pageable pageable, SimpleFilter filter) {
+		return ingredientRepository.findAll(findByNameLike(filter), pageable);
+	}
+
+	private Specification<Ingredient> findByNameLike(SimpleFilter filter) {
+		return (root, query, cb)->{
+			if(filter.getSearch().isEmpty()) return null;
+			return cb.like(cb.lower(root.get("name")), filter.getSearch().toLowerCase()+"%");
+		};
+	}
 }
