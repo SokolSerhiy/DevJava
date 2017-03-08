@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import ua.dto.filter.AmountFilter;
 import ua.dto.form.AmountForm;
 import ua.entity.Amount;
 import ua.entity.Ingredient;
@@ -25,5 +26,5 @@ public interface AmountService{
 	Amount findUnique(String amount, Ingredient ingredient,
 			MeasuringSystem system);
 
-	Page<Amount> findAll(Pageable pageable);
+	Page<Amount> findAll(Pageable pageable, AmountFilter filter);
 }
