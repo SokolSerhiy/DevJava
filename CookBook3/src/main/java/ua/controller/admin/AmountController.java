@@ -1,5 +1,4 @@
 package ua.controller.admin;
-import static ua.util.ParamBuilder.*;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import ua.dto.filter.AmountFilter;
 import ua.dto.form.AmountForm;
 import ua.editor.IngredientEditor;
 import ua.editor.MeasuringSystemEditor;
@@ -26,6 +26,7 @@ import ua.entity.MeasuringSystem;
 import ua.service.AmountService;
 import ua.service.IngredientService;
 import ua.service.MeasuringSystemService;
+import ua.util.ParamBuilder;
 import ua.validator.AmountValidator;
 
 @Controller
@@ -49,36 +50,67 @@ public class AmountController {
 		binder.setValidator(new AmountValidator(amountService));
 	}
 	
+	@ModelAttribute("filter")
+	public AmountFilter getFilter(){
+		return new AmountFilter();
+	}
+	
 	@ModelAttribute("amount")
 	public AmountForm getForm(){
 		return new AmountForm();
 	}
 	
 	@GetMapping
-	public String show(Model model, @PageableDefault Pageable pageable){
-		model.addAttribute("page", amountService.findAll(pageable));
+	public String show(Model model, @PageableDefault Pageable pageable, @ModelAttribute("filter") AmountFilter filter){
+		model.addAttribute("page", amountService.findAll(pageable, filter));
 		model.addAttribute("measuringSystems", measuringSystemService.findAll());
 		model.addAttribute("ingredients", ingredientService.findAll());
 		return "admin-amount";
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id, @PageableDefault Pageable pageable){
+	public String delete(@PathVariable Long id, @PageableDefault Pageable pageable, @ModelAttribute("filter") AmountFilter filter){
 		amountService.delete(id);
-		return "redirect:/admin/amount"+getParams(pageable);
+		return "redirect:/admin/amount"+getParams(pageable, filter);
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+	public String update(@PathVariable Long id, Model model, @PageableDefault Pageable pageable, @ModelAttribute("filter") AmountFilter filter){
 		model.addAttribute("amount", amountService.findForm(id));
-		return show(model, pageable);
+		return show(model, pageable, filter);
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("amount") @Valid AmountForm amount, BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable){
-		if(br.hasErrors())return show(model, pageable);
+	public String save(@ModelAttribute("amount") @Valid AmountForm amount, BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable, @ModelAttribute("filter") AmountFilter filter){
+		if(br.hasErrors())return show(model, pageable, filter);
 		amountService.save(amount);
 		status.setComplete();
-		return "redirect:/admin/amount"+getParams(pageable);
+		return "redirect:/admin/amount"+getParams(pageable, filter);
+	}
+	
+	private String getParams(Pageable pageable, AmountFilter filter){
+		String page = ParamBuilder.getParams(pageable);
+		StringBuilder builder = new StringBuilder(page);
+		if(!filter.getMax().isEmpty()){
+			builder.append("&max=");
+			builder.append(filter.getMax());
+		}
+		if(!filter.getMin().isEmpty()){
+			builder.append("&min=");
+			builder.append(filter.getMin());
+		}
+		if(!filter.getIngredientId().isEmpty()){
+			for (Long id : filter.getIngredientId()) {
+				builder.append("&ingredientId=");
+				builder.append(id);
+			}
+		}
+		if(!filter.getSystemId().isEmpty()){
+			for (Long id : filter.getSystemId()) {
+				builder.append("&systemId=");
+				builder.append(id);
+			}
+		}
+		return builder.toString();
 	}
 }

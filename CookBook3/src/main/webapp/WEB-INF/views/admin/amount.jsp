@@ -25,7 +25,32 @@
 	</nav>
 </div>
 <div class="row">
-	<div class="col-md-3 col-xs-12"></div>
+	<div class="col-md-3 col-xs-12">
+		<form:form class="form-horizontal" action="/admin/amount" method="GET" modelAttribute="filter">
+			<custom:hiddenInputs excludeParams="min, max, ingredientId, systemId, _ingredientId, _systemId"/>
+			<div class="form-group">
+				<div class="col-sm-6">
+					<form:input path="min" class="form-control" placeholder="Min"/>
+				</div>
+				<div class="col-sm-6">
+					<form:input path="max" class="form-control" placeholder="Max"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="contol-label col-sm-12">Ingredients</label>
+				<div class="col-sm-12">
+					<form:checkboxes element="div" items="${ingredients}" itemValue="id" itemLabel="name" path="ingredientId"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="contol-label col-sm-12">Measuring systems</label>
+				<div class="col-sm-12">
+					<form:checkboxes element="div" items="${measuringSystems}" itemValue="id" itemLabel="name" path="systemId"/>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Ok</button>
+		</form:form>
+	</div>
 	<div class="col-md-7 col-xs-12">
 		<div class="row">
 			<div class="col-md-12 col-xs-12">
