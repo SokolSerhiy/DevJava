@@ -37,7 +37,7 @@
 	<div class="col-md-7 col-xs-12">
 		<div class="row">
 			<div class="col-md-12 col-xs-12">
-				<form:form class="form-horizontal" action="/admin/ingredient" method="POST" modelAttribute="ingredient">
+				<form:form class="form-horizontal" action="/admin/ingredient" method="POST" modelAttribute="ingredient" enctype="multipart/form-data">
 					<custom:hiddenInputs excludeParams="name"/>
 					<div class="form-group">
 						<label for="name" style="color:red;text-align:left;" class="col-sm-10 col-sm-offset-2 control-label"><form:errors path="name"/></label>
@@ -49,6 +49,12 @@
     					</div>
   					</div>
   					<div class="form-group">
+    					<label for="file" class="col-sm-2 control-label">Image</label>
+    					<div class="col-sm-10">
+      						<input name="file" id="file" type="file">
+    					</div>
+  					</div>
+  					<div class="form-group">
     					<div class="col-sm-offset-2 col-sm-10">
       						<button type="submit" class="btn btn-default">Create</button>
     					</div>
@@ -57,15 +63,17 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-xs-4"><h3>Ingredient name</h3></div>
-			<div class="col-md-4 col-xs-4"><h3>Update</h3></div>
-			<div class="col-md-4 col-xs-4"><h3>Delete</h3></div>
+			<div class="col-md-3 col-xs-3"><h3>Image</h3></div>
+			<div class="col-md-3 col-xs-3"><h3>Ingredient name</h3></div>
+			<div class="col-md-3 col-xs-3"><h3>Update</h3></div>
+			<div class="col-md-3 col-xs-3"><h3>Delete</h3></div>
 		</div>
 			<c:forEach items="${page.content}" var="ingredient">
 				<div class="row">
-					<div class="col-md-4 col-xs-4">${ingredient.name}</div>
-					<div class="col-md-4 col-xs-4"><a class="btn btn-warning" href="/admin/ingredient/update/${ingredient.id}<custom:allParams/>">update</a></div>
-					<div class="col-md-4 col-xs-4"><a class="btn btn-danger" href="/admin/ingredient/delete/${ingredient.id}<custom:allParams/>">delete</a></div>
+					<div class="col-md-3 col-xs-3"><img src="/images/ingredient/${ingredient.id}.jpg?version=${ingredient.version}" width="100%"></div>
+					<div class="col-md-3 col-xs-3">${ingredient.name}</div>
+					<div class="col-md-3 col-xs-3"><a class="btn btn-warning" href="/admin/ingredient/update/${ingredient.id}<custom:allParams/>">update</a></div>
+					<div class="col-md-3 col-xs-3"><a class="btn btn-danger" href="/admin/ingredient/delete/${ingredient.id}<custom:allParams/>">delete</a></div>
 				</div>
 			</c:forEach>
 	</div>
