@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
@@ -22,6 +23,7 @@ public class User extends AbstractEntity implements UserDetails{
 	
 	private String password;
 	@Enumerated
+	@Column(name="_role")
 	private Role role;
 
 	public String getEmail() {
