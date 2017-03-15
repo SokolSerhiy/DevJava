@@ -13,7 +13,7 @@
 		<session-management session-fixation-protection="changeSessionId" invalid-session-url="/" >
 			<concurrency-control expired-url="/login?expired=true" max-sessions="1"/>
 		</session-management>
-		<remember-me key="myAppKey"  user-service-ref="userDetailsService" remember-me-cookie="rem"/>
+		<remember-me key="myAppKey" user-service-ref="userDetailsService" remember-me-cookie="rem"/>
 	</http>
 	<beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"/>
 <!-- 	<beans:bean id="userDetailsService" class="ua.service.implementation.UserServiceImpl"> -->
