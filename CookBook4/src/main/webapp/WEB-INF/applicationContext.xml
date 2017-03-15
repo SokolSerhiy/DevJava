@@ -17,8 +17,9 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-	<task:annotation-driven executor="taskExecutor"/>
 	<task:executor id="taskExecutor" pool-size="15-20" queue-capacity="1000" />
+	<task:scheduler id="taskScheduler" pool-size="10"/>
+	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler"/>
 	
 	<!-- Data config holder -->
 	<bean id="propertyConfigurer"
@@ -75,4 +76,5 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
+	<import resource="security.xml"/>
 </beans>
