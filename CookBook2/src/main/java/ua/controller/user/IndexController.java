@@ -43,4 +43,9 @@ public class IndexController {
 	public String login(){
 		return "user-login";
 	}
+	
+	@GetMapping("/peoples")
+	public String people(){
+		return "user-people";
+	}
 }
