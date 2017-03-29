@@ -17,11 +17,26 @@
                     return array;
                 }
             })
-            app.controller('mainCtrl', function($scope, $http){
+            app.controller('mainCtrl', function($scope, $http, $location){
                 $scope.currentView = 'data';
                 $scope.people = [];
                 $scope.currentItem = {};
                 $scope.search = '';
+                
+                $scope.getSearch = function() {
+                	var index = $location.hash().indexOf('=')+1;
+                	if(index!=0)
+                	$scope.search = $location.hash().substring(index);
+				}
+                $scope.getSearch();
+                
+                $scope.$watch('search', function (oldValue, newValue) {
+                	if(oldValue){
+                		$location.hash('search='+$scope.search);
+                	}else{
+                		$location.hash('');
+                	}
+				});
                 
                 $scope.add = function(){
                     $scope.currentView = 'form';
