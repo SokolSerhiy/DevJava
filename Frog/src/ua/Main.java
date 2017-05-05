@@ -141,11 +141,6 @@ public class Main {
 	static int find(int x, int y, int count){
 		if(x<10&&y<16&&x>=0&&y>=0&&array[x][y]!=tree){
 			if(array[x][y]==star) return count;
-//			if(coordinate.count > count){
-//				
-//			}else{
-//				
-//			}
 			int a = find(x+2, y+1, count+1);
 			int b = find(x-2, y+1, count+1);
 			int c = find(x+1, y+2, count+1);
