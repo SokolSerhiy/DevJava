@@ -83,7 +83,7 @@ public class Main {
 		double money = 1000;
 		double percent = 0.2;
 		int age = 23;
-		for(; age<=65; age++){
+		for(; age<=60; age++){
 			System.out.println(age+" "+money);
 			money = money*(1+percent)+1000;
 		}
