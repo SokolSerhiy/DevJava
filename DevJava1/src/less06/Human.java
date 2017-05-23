@@ -1,6 +1,6 @@
 package less06;
 
-public class Human {
+public class Human extends Object{
 
 	int age;
 	
@@ -37,5 +37,9 @@ public class Human {
 	void eat(String food){
 		System.out.println(this.name+": mmmm tasty "+food);
 		capacity+=0.5;
+	}
+	
+	public String toString(){
+		return name+" "+age;
 	}
 }
