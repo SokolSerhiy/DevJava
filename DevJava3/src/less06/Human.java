@@ -1,12 +1,10 @@
 package less06;
 
-public class Human {
+public class Human extends Object{
 
 	int age;
 	
 	String name;
-	
-	int maxDistance = 5000;
 	
 	Human(){
 		System.out.println("Hello");
@@ -19,15 +17,12 @@ public class Human {
 		System.out.println(this);
 	}
 	
-	void run(){
-		System.out.println(this.name+": go-go-go!!!");
+	void eat(String meat){
+		System.out.println(name+": mmm taste "+meat);
 	}
 	
-	boolean run(int distance){
-		if(maxDistance-distance<0) return false;
-		maxDistance-=distance;
-		System.out.println(name + ": I run "+distance);
-		return true;
+	void run(){
+		System.out.println(this.name+": go-go-go!!!");
 	}
 	
 	void printData(){

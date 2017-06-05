@@ -151,16 +151,11 @@ public class Mover implements Runnable {
 		System.out.println();
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if (j == 0)
-					System.out.print("| ");
-				if (field[i][j] == snake)
-					System.out.print("* ");
-				if (field[i][j] == food)
-					System.out.print("& ");
-				if (field[i][j] == 0)
-					System.out.print("  ");
-				if (j == size - 1)
-					System.out.println(" |");
+				if (j == 0) System.out.print("| ");
+				if (field[i][j] == snake) System.out.print("* ");
+				if (field[i][j] == food) System.out.print("& ");
+				if (field[i][j] == 0) System.out.print("  ");
+				if (j == size - 1) System.out.println(" |");
 			}
 		}
 		for (int i = 0; i < size + 2; i++) {
