@@ -1,0 +1,6 @@
+Engineer 15000 Ivan 16000
+Engineer 15000 Mykola 18000
+Cleaner 3200 Petro 4000
+Cleaner 3200 Sergiy 5000
+Driver 7000 Petro 8000
+Driver 7000 Ivan 15000
