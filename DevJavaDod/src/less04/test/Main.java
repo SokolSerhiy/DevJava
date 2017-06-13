@@ -11,5 +11,4 @@ public class Main {
 		Location location = new Location("Lviv");
 		location.addHumans(human, human1, human2);
 	}
-
 }
