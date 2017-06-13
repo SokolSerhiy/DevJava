@@ -61,7 +61,7 @@ public class HumanValidator {
 		}
 		Arrays.sort(results);
 		Arrays.sort(array);
-		if(array[0]!=min||array[9999]!=max) throw new ПомилкаГри("У Human метод "+methodName+"() має повертати int від 10 до 20, а повернув від "+array[0]+" до "+array[9999]);
+		if(array[0]!=min||array[9999]!=max) throw new ПомилкаГри("У Human метод "+methodName+"() має повертати int від "+min+" до "+max+", а повернув від "+array[0]+" до "+array[9999]);
 		if(results[0]!=1||results[9999]!=5) throw new ПомилкаГри("У Human метод "+methodName+"() має зʼїдати від 1 до 5, а їсть від "+results[0]+" до "+results[9999]);
 	}
 	
