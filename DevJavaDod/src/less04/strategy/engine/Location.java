@@ -111,32 +111,32 @@ public class Location implements Runnable{
 		for (int i = 0; i < objects.length; i++) {
 			works.add(new Collect(objects[i], "collectFood", new ResourceOperationFood(resources)));
 			humanResources.setFoodCollectors(humanResources.getFoodCollectors()+1);
-			addHumansToList(objects);
 		}
+		addHumansToList(objects);
 	}
 	
 	public void addWoodCollectors(Object... objects) {
 		for (int i = 0; i < objects.length; i++) {
 			works.add(new Collect(objects[i], "collectWood", new ResourceOperationWood(resources)));
 			humanResources.setWoodCollectors(humanResources.getWoodCollectors()+1);
-			addHumansToList(objects);
 		}
+		addHumansToList(objects);
 	}
 	
 	public void addStoneCollectors(Object... objects) {
 		for (int i = 0; i < objects.length; i++) {
 			works.add(new Collect(objects[i], "collectStone", new ResourceOperationStone(resources)));
 			humanResources.setStoneCollectors(humanResources.getStoneCollectors()+1);
-			addHumansToList(objects);
 		}
+		addHumansToList(objects);
 	}
 	
 	public void addIronCollectors(Object... objects) {
 		for (int i = 0; i < objects.length; i++) {
 			works.add(new Collect(objects[i], "collectIron", new ResourceOperationIron(resources)));
 			humanResources.setIronCollectors(humanResources.getIronCollectors()+1);
-			addHumansToList(objects);
 		}
+		addHumansToList(objects);
 	}
 	
 	private void placeHumans(){
