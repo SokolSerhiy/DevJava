@@ -1,4 +1,4 @@
-package less04.strategy;
+package less04.strategy.exception;
 
 public class ПомилкаГри extends RuntimeException{
 

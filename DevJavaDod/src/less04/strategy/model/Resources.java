@@ -1,9 +1,11 @@
-package less04.strategy;
+package less04.strategy.model;
 
-public class Resources {
+import java.io.Serializable;
 
-	private Object[] humans;
-	
+public class Resources implements Serializable{
+
+	private static final long serialVersionUID = 680879005939193115L;
+
 	private int food;
 	
 	private int wood;
@@ -13,15 +15,7 @@ public class Resources {
 	private int iron;
 	
 	public void printResourcesInfo(String name){
-		System.out.println(name+": Food="+food+" Wood="+wood+" Stone="+stone+" Iron="+iron+" Human="+humans.length);
-	}
-
-	public Object[] getHumans() {
-		return humans;
-	}
-
-	public void setHumans(Object[] humans) {
-		this.humans = humans;
+		System.out.println(name+": Food="+food+" Wood="+wood+" Stone="+stone+" Iron="+iron);
 	}
 
 	public int getFood() {
