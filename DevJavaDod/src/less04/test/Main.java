@@ -10,9 +10,9 @@ public class Main {
 		Human human2 = new Human();
 		Human human3 = new Human();
 		Location location = new Location("Lviv");
-//		location.addHumans(human, human1, human2, human3);
-		location.addIronCollectors(human, human1);
-		location.addStoneCollectors(human2, human3);
+		location.addHumans(human, human1, human2, human3);
+//		location.addIronCollectors(human, human1);
+//		location.addStoneCollectors(human2, human3);
 		location.start();
 	}
 }
