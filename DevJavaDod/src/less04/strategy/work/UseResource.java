@@ -1,6 +1,6 @@
 package less04.strategy.work;
 
-public interface Use {
+public interface UseResource {
 
 	boolean use();
 }

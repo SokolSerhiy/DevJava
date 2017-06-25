@@ -1,6 +1,8 @@
 package less04.strategy.model;
 
-public class HumanResources {
+public class HumanInfo {
+	
+	private static final HumanInfo instance = new HumanInfo();
 
 	private int foodCollectors;
 	
@@ -9,6 +11,12 @@ public class HumanResources {
 	private int stoneCollectors;
 	
 	private int ironCollectors;
+	
+	private HumanInfo(){}
+	
+	public static HumanInfo getInstance(){
+		return instance;
+	}
 	
 	public void printHumanInfo(String name){
 		System.out.println(name+": food collectors="+foodCollectors+", wood collectors="+woodCollectors+", stone collectors="+stoneCollectors+", iron collectors="+ironCollectors);

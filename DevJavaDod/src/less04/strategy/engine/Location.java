@@ -6,13 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import less04.strategy.model.HumanResources;
+import less04.strategy.model.HumanInfo;
 import less04.strategy.model.Resources;
+import less04.strategy.model.Worker;
+import less04.strategy.model.impl.HumanWrapper;
 import less04.strategy.validator.Validator;
 import less04.strategy.validator.impl.ArrayLengthValidator;
 import less04.strategy.validator.impl.ClassNameValidator;
@@ -20,13 +21,7 @@ import less04.strategy.validator.impl.CollectResultValidator;
 import less04.strategy.validator.impl.ResourceValidator;
 import less04.strategy.validator.impl.SameClassValidator;
 import less04.strategy.validator.impl.SpendResourcesValidator;
-import less04.strategy.work.Work;
-import less04.strategy.work.impl.Collect;
-import less04.strategy.work.impl.EatFood;
-import less04.strategy.work.impl.ResourceOperationFood;
-import less04.strategy.work.impl.ResourceOperationIron;
-import less04.strategy.work.impl.ResourceOperationStone;
-import less04.strategy.work.impl.ResourceOperationWood;
+import less04.strategy.work.impl.WorkPlace;
 
 public class Location implements Runnable{
 
@@ -38,11 +33,7 @@ public class Location implements Runnable{
 	
 	private final Resources resources = load();
 	
-	private final HumanResources humanResources = new HumanResources();
-	
-	private final List<Object> humans = new ArrayList<>();
-	
-	private final List<Work> works = new ArrayList<>();
+	private final List<Worker> workers = new ArrayList<>();
 	
 	public Location(String name) {
 		this.name = name;
@@ -66,12 +57,8 @@ public class Location implements Runnable{
 		return new Resources();
 	}
 	
-	
-
 	public void addHumans(Object... objects){
-		validate(objects);
-		addHumansToList(objects);
-		placeHumans();
+		placeHumans(objects);
 	}
 	
 	public void start(){
@@ -101,64 +88,19 @@ public class Location implements Runnable{
 		validator.validate(objects);
 	}
 	
-	private void addHumansToList(Object[] objects){
-		for (int i = 0; i < objects.length; i++) {
-			humans.add(objects[i]);
+	public void addCollectors(String resourceName, Object... objects) {
+		validate(objects);
+		WorkPlace workPlace = WorkPlace.valueOf(resourceName.toUpperCase());
+		for (Object object : objects) {
+			Worker worker = new HumanWrapper(object, workPlace, resources);
+			workers.add(worker);
 		}
 	}
 	
-	public void addFoodCollectors(Object... objects) {
+	private void placeHumans(Object... objects){
 		for (int i = 0; i < objects.length; i++) {
-			works.add(new Collect(objects[i], "collectFood", new ResourceOperationFood(resources)));
-			humanResources.setFoodCollectors(humanResources.getFoodCollectors()+1);
-		}
-		addHumansToList(objects);
-	}
-	
-	public void addWoodCollectors(Object... objects) {
-		for (int i = 0; i < objects.length; i++) {
-			works.add(new Collect(objects[i], "collectWood", new ResourceOperationWood(resources)));
-			humanResources.setWoodCollectors(humanResources.getWoodCollectors()+1);
-		}
-		addHumansToList(objects);
-	}
-	
-	public void addStoneCollectors(Object... objects) {
-		for (int i = 0; i < objects.length; i++) {
-			works.add(new Collect(objects[i], "collectStone", new ResourceOperationStone(resources)));
-			humanResources.setStoneCollectors(humanResources.getStoneCollectors()+1);
-		}
-		addHumansToList(objects);
-	}
-	
-	public void addIronCollectors(Object... objects) {
-		for (int i = 0; i < objects.length; i++) {
-			works.add(new Collect(objects[i], "collectIron", new ResourceOperationIron(resources)));
-			humanResources.setIronCollectors(humanResources.getIronCollectors()+1);
-		}
-		addHumansToList(objects);
-	}
-	
-	private void placeHumans(){
-		for (int i = 0; i < humans.size(); i++) {
-			switch (i%4) {
-			case 0:
-				works.add(new Collect(humans.get(i), "collectFood", new ResourceOperationFood(resources)));
-				humanResources.setFoodCollectors(humanResources.getFoodCollectors()+1);
-				break;
-			case 1:
-				works.add(new Collect(humans.get(i), "collectWood", new ResourceOperationWood(resources)));
-				humanResources.setWoodCollectors(humanResources.getWoodCollectors()+1);
-				break;
-			case 2:
-				works.add(new Collect(humans.get(i), "collectStone", new ResourceOperationStone(resources)));
-				humanResources.setStoneCollectors(humanResources.getStoneCollectors()+1);
-				break;
-			case 3:
-				works.add(new Collect(humans.get(i), "collectIron", new ResourceOperationIron(resources)));
-				humanResources.setIronCollectors(humanResources.getIronCollectors()+1);
-				break;
-			}
+			Worker worker = new HumanWrapper(objects[i], WorkPlace.values()[i%4], resources);
+			workers.add(worker);
 		}
 	}
 	
@@ -169,47 +111,12 @@ public class Location implements Runnable{
 		}
 	}
 	
-	private void useResources(){
-		for (int i = 0; i < humans.size(); i++) {
-			if(!new EatFood("bellyful", humans.get(i), new ResourceOperationFood(resources), 50).use()){
-				for (int j = 0; j < works.size(); j++) {
-					if(works.get(j).equals(humans.get(i))){
-						Work work = works.remove(j);
-						if(work.getMethodName().equals("collectFood")) {
-							works.add(work);
-						} else {
-							works.add(new Collect(humans.get(i), "collectFood", new ResourceOperationFood(resources)));
-							humanResources.setFoodCollectors(humanResources.getFoodCollectors()+1);
-							decrementWorker(work.getMethodName());
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	private void decrementWorker(String methodName){
-		switch (methodName) {
-		case "collectWood":
-			humanResources.setWoodCollectors(humanResources.getWoodCollectors()-1);
-			break;
-		case "collectStone":
-			humanResources.setStoneCollectors(humanResources.getStoneCollectors()-1);
-			break;
-		case "collectIron":
-			humanResources.setIronCollectors(humanResources.getIronCollectors()-1);
-			break;
-		}
-	}
-
 	@Override
 	public void run() {
-		setBellyful();
 		while(true){
 			resources.printResourcesInfo(name);
-			humanResources.printHumanInfo(name);
-			useResources();
-			doWork(works);
+			HumanInfo.getInstance().printHumanInfo(name);
+			doWork();
 			doCommand();
 			save();
 			delay();
@@ -224,21 +131,11 @@ public class Location implements Runnable{
 		}
 	}
 	
-	private void doWork(List<Work> works){
-		for (Work work : works) {
-			work.doWork();
-		}
-	}
-	
-	private void setBellyful(){
-		for (int i = 0; i < humans.size(); i++) {
-			try {
-				Field field = humans.get(i).getClass().getDeclaredField("bellyful");
-				field.setAccessible(true);
-				field.set(humans.get(i), 50);
-			} catch (ReflectiveOperationException e) {
-				throw new RuntimeException(e);
-			}
+	private void doWork(){
+		for (Worker worker : workers) {
+			worker.takeFood();
+			if(worker.isHungry()) worker.changeWork(WorkPlace.FOOD);
+			worker.getWork().doWork();
 		}
 	}
 }
