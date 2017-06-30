@@ -1,7 +1,11 @@
 package less11;
 
-public class Person implements Comparable<Person>{
+import java.io.Serializable;
+
+public class Person implements Comparable<Person>, Serializable{
 	
+	private static final long serialVersionUID = 1697998443327024712L;
+
 	private String name;
 	
 	private int age;

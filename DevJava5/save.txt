@@ -1,0 +1,3 @@
+Ivan 18 MALE
+Mykola 15 MALE
+Petro 19 MALE
