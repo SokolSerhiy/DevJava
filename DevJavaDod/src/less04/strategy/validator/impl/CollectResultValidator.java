@@ -42,7 +42,7 @@ public class CollectResultValidator implements Validator{
 			Arrays.sort(array);
 			if(array[0]!=min||array[9999]!=max) throw new ПомилкаГри("У Human метод collectFood() має повертати int від "+min+" до "+max+", а повернув від "+array[0]+" до "+array[9999]);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new ПомилкаГри("У Human має бути метод "+methodName+"()");
+			throw new ПомилкаГри("У класі має бути метод "+methodName+"()");
 		}
 		System.out.println("Перевірка CollectResult пройдена");
 	}
