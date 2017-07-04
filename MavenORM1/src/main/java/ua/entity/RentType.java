@@ -28,6 +28,11 @@ public class RentType {
 		this.name = name;
 	}
 	
+	public RentType(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	public RentType() {
 	}
 
