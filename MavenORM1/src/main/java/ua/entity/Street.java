@@ -23,6 +23,13 @@ public class Street {
 	
 	@OneToMany(mappedBy="street")
 	private List<Apartment> apartments = new ArrayList<>();
+	
+	public Street(String name) {
+		this.name = name;
+	}
+
+	public Street() {
+	}
 
 	public Integer getId() {
 		return id;

@@ -24,6 +24,13 @@ public class Area {
 	@OneToMany(mappedBy="area")
 	private List<Apartment> apartments = new ArrayList<>();
 
+	public Area(String name) {
+		this.name = name;
+	}
+
+	public Area() {
+	}
+
 	public Integer getId() {
 		return id;
 	}

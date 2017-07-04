@@ -24,6 +24,13 @@ public class RentType {
 	@OneToMany(mappedBy="rentType")
 	private List<Apartment> apartments = new ArrayList<>();
 
+	public RentType(String name) {
+		this.name = name;
+	}
+	
+	public RentType() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
