@@ -39,4 +39,6 @@ public class Main {
 		System.out.println(rentType2.getName());
 		factory.close();
 	}
+	
+	
 }
