@@ -1,10 +1,12 @@
 package ua.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import ua.entity.Apartment;
 import ua.entity.RentType;
 
 public class RentTypeDao {
@@ -55,5 +57,28 @@ public class RentTypeDao {
 		em.getTransaction().commit();
 		em.close();
 		return types;
+	}
+	
+	public List<RentType> findByApartmentPrice(BigDecimal price){
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		List<RentType> types = em.createQuery("SELECT rt FROM RentType rt JOIN rt.apartments a WHERE a.price = ?1", RentType.class)
+				.setParameter(1, price)
+				.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return types;
+	}
+	
+	public List<Apartment> findApartmentByRentTypeId(Integer id){
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		List<Apartment> apartments = em.createQuery("SELECT DISTINCT rt FROM RentType rt JOIN FETCH rt.apartments a WHERE rt.id = ?1", RentType.class)
+				.setParameter(1, id)
+				.getSingleResult()
+				.getApartments();
+		em.getTransaction().commit();
+		em.close();
+		return apartments;
 	}
 }

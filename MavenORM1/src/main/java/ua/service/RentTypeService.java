@@ -1,5 +1,6 @@
 package ua.service;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 import ua.dao.RentTypeDao;
@@ -39,6 +40,19 @@ public class RentTypeService {
 	
 	public void findAll() {
 		dao.findAll().forEach(this::print);
+	}
+	
+	public void findByApartmentPrice(){
+		System.out.println("Enter apartment price");
+		BigDecimal price = new BigDecimal(sc.next());
+		dao.findByApartmentPrice(price).forEach(this::print);
+	}
+	
+	public void findApartmentByRentTypeId(){
+		int id = readId();
+		dao.findApartmentByRentTypeId(id).forEach(e->{
+			System.out.println(e.getId()+" "+e.getPrice()+" "+e.getNumber()+" "+e.getDescription());
+		});
 	}
 	
 	private String readName(){
