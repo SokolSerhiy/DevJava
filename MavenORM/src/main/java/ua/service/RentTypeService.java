@@ -1,9 +1,11 @@
 package ua.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
 import ua.dao.RentTypeDao;
+import ua.entity.Apartment;
 import ua.entity.RentType;
 
 public class RentTypeService {
@@ -43,6 +45,23 @@ public class RentTypeService {
 		List<RentType> list = dao.findAll();
 		for (RentType rentType : list) {
 			print(rentType);
+		}
+	}
+	
+	public void findByApartmentPrice() {
+		System.out.println("Enter apartment price");
+		BigDecimal price = new BigDecimal(sc.next());
+		List<RentType> list = dao.findByApartmentPrice(price);
+		for (RentType rentType : list) {
+			print(rentType);
+		}
+	}
+	
+	public void findApartmentByRentTypeId() {
+		int id = readId();
+		List<Apartment> apartments = dao.findApartmentByRentTypeId(id);
+		for (Apartment apartment : apartments) {
+			System.out.println(apartment.getId()+" "+apartment.getDescription()+" "+apartment.getPrice());
 		}
 	}
 	

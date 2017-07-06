@@ -22,6 +22,8 @@ public class Main {
 				System.out.println("Enter 3 to delete rent type");
 				System.out.println("Enter 4 to find one by id");
 				System.out.println("Enter 5 to find all");
+				System.out.println("Enter 6 to find by apartment price");
+				System.out.println("Enter 6 to find apartment by rent type id");
 				switch (sc.next()) {
 				case "1":
 					service.add();
@@ -37,6 +39,13 @@ public class Main {
 					break;
 				case "5":
 					service.findAll();
+					break;
+				case "6":
+					service.findByApartmentPrice();
+					break;
+				case "7":
+					service.findAll();
+					service.findApartmentByRentTypeId();
 					break;
 				default:
 					isRun = false;

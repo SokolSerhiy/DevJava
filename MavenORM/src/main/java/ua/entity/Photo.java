@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="photo")
+@Table(name="photo_entity")
 public class Photo {
 
 	@Id

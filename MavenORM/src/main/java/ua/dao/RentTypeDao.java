@@ -1,11 +1,12 @@
 package ua.dao;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import ua.entity.Apartment;
 import ua.entity.RentType;
 
 public class RentTypeDao {
@@ -53,6 +54,29 @@ public class RentTypeDao {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		List<RentType> type = manager.createQuery("SELECT rt FROM RentType rt", RentType.class).getResultList();
+		manager.getTransaction().commit();
+		manager.close();
+		return type;
+	}
+	
+	public List<RentType> findByApartmentPrice(BigDecimal price) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		List<RentType> type = manager.createQuery("SELECT rt FROM RentType rt JOIN rt.apartments a WHERE a.price = ?1", RentType.class)
+				.setParameter(1, price)
+				.getResultList();
+		manager.getTransaction().commit();
+		manager.close();
+		return type;
+	}
+	
+	public List<Apartment> findApartmentByRentTypeId(Integer id) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		List<Apartment> type = manager.createQuery("SELECT DISTINCT rt FROM RentType rt JOIN FETCH rt.apartments a WHERE rt.id = ?1", RentType.class)
+				.setParameter(1, id)
+				.getSingleResult()
+				.getApartments();
 		manager.getTransaction().commit();
 		manager.close();
 		return type;
