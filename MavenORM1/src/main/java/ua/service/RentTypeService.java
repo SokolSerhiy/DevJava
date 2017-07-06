@@ -55,6 +55,12 @@ public class RentTypeService {
 		});
 	}
 	
+	public void criteria(){
+		dao.criteria().forEach(e->{
+			System.out.println(e.getId()+" "+e.getPrice()+" "+e.getNumber()+" "+e.getDescription());
+		});
+	}
+	
 	private String readName(){
 		System.out.println("Enter rent type name");
 		return sc.next().replaceAll("_", " ");
