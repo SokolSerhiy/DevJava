@@ -65,6 +65,13 @@ public class RentTypeService {
 		}
 	}
 	
+	public void criteria(){
+		List<Apartment> apartments = dao.findApartmentAllCriteria();
+		for (Apartment apartment : apartments) {
+			System.out.println(apartment.getId()+" "+apartment.getDescription()+" "+apartment.getPrice());
+		}
+	}
+	
 	private void print(RentType rentType) {
 		System.out.println(rentType.getId()+" "+rentType.getName());
 	}

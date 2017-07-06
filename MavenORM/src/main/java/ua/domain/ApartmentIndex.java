@@ -19,6 +19,18 @@ public class ApartmentIndex {
 	private BigDecimal rate;
 	
 	private int rooms;
+	
+	public ApartmentIndex(Integer id, String photoUrl, Integer version, BigDecimal price, String rentType, String area,
+			BigDecimal rate, int rooms) {
+		this.id = id;
+		this.photoUrl = photoUrl;
+		this.version = version;
+		this.price = price;
+		this.rentType = rentType;
+		this.area = area;
+		this.rate = rate;
+		this.rooms = rooms;
+	}
 
 	public Integer getId() {
 		return id;
@@ -82,5 +94,11 @@ public class ApartmentIndex {
 
 	public void setRooms(int rooms) {
 		this.rooms = rooms;
+	}
+
+	@Override
+	public String toString() {
+		return "ApartmentIndex [id=" + id + ", photoUrl=" + photoUrl + ", version=" + version + ", price=" + price
+				+ ", rentType=" + rentType + ", area=" + area + ", rate=" + rate + ", rooms=" + rooms + "]";
 	}
 }

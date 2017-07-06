@@ -1,10 +1,16 @@
 package ua.dao;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 import ua.entity.Apartment;
 import ua.entity.RentType;
@@ -80,5 +86,31 @@ public class RentTypeDao {
 		manager.getTransaction().commit();
 		manager.close();
 		return type;
+	}
+	
+	public List<Apartment> findApartmentAllCriteria() {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		BigDecimal minPrice = new BigDecimal("300");
+		BigDecimal maxPrice = new BigDecimal("900");
+		Integer rentTypeId = 1;
+		Integer rentTypeId2 = 6;
+		List<Integer> rentTypeIds = Arrays.asList(rentTypeId, rentTypeId2);
+		Integer areaId = 1;
+		int rooms = 2;
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Apartment> cq = cb.createQuery(Apartment.class);
+		Root<Apartment> root = cq.from(Apartment.class);
+		cq.select(root);
+		Predicate pricePred = cb.between(root.get("price"), minPrice, maxPrice);
+		Predicate rentTypePred = root.get("rentType").in(rentTypeIds);
+		Predicate areaPred = cb.equal(root.get("area"), areaId);
+		Predicate roomsPred = cb.equal(root.get("rooms"), rooms);
+		Predicate all = cb.and(pricePred, rentTypePred, areaPred, roomsPred);
+		cq.where(all);
+		List<Apartment> apartments = manager.createQuery(cq).getResultList();
+		manager.getTransaction().commit();
+		manager.close();
+		return apartments;
 	}
 }
