@@ -59,7 +59,7 @@ public class RentTypeDao {
 	public List<RentType> findAll() {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		List<RentType> type = manager.createQuery("SELECT rt FROM RentType rt", RentType.class).getResultList();
+		List<RentType> type = manager.createQuery("FROM RentType", RentType.class).getResultList();
 		manager.getTransaction().commit();
 		manager.close();
 		return type;
@@ -79,7 +79,7 @@ public class RentTypeDao {
 	public List<Apartment> findApartmentByRentTypeId(Integer id) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		List<Apartment> type = manager.createQuery("SELECT DISTINCT rt FROM RentType rt JOIN FETCH rt.apartments a WHERE rt.id = ?1", RentType.class)
+		List<Apartment> type = manager.createQuery("SELECT DISTINCT rt FROM RentType rt JOIN FETCH rt.apartments WHERE rt.id = ?1", RentType.class)
 				.setParameter(1, id)
 				.getSingleResult()
 				.getApartments();
