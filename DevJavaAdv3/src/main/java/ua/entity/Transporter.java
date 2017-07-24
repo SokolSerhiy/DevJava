@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,18 +35,19 @@ public class Transporter {
 	private int age;
 	@Column(length=13)
 	private String phone;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Brand brand;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Model model;
 	
 	private int carAge;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private City cityArrive;
 	
 	private LocalDateTime dateArrive;
 	@Enumerated
 	private Status status;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -1,9 +1,13 @@
 package ua.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +19,16 @@ public class Brand {
 	private Integer id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy="brand")
+	private List<Transporter> transporters = new ArrayList<>();
+
+	public Brand(String name) {
+		this.name = name;
+	}
+
+	public Brand() {
+	}
 
 	public Integer getId() {
 		return id;
