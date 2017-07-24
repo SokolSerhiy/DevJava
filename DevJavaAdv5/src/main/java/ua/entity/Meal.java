@@ -3,6 +3,7 @@ package ua.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Meal {
 	private BigDecimal price;
 	
 	private int weight;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Cuisine cuisine;
 	
 	public Integer getId() {
