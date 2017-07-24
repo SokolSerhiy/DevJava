@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,10 +39,11 @@ public class Cafe {
 	private String phone;
 	
 	private String email;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose open;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose close;
+	
 	public Integer getId() {
 		return id;
 	}
