@@ -1,24 +1,21 @@
 package ua.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cafe")
-public class Cafe {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+public class Cafe extends AbstractEntity{
 	
 	private BigDecimal rate;
 	
@@ -31,24 +28,35 @@ public class Cafe {
 	private String address;
 	
 	private String shortDescription;
+	
 	@Lob
 	private String fullDescription;
+	
 	@Enumerated
 	private Type type;
+	
 	@Column(length=13)
 	private String phone;
 	
 	private String email;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose open;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose close;
 	
-	public Integer getId() {
-		return id;
+	@OneToMany(mappedBy="cafe")
+	private List<ua.entity.Table> tables = new ArrayList<>();
+	
+	@OneToMany(mappedBy="cafe")
+	private List<Meal> meals = new ArrayList<>();
+	
+	public List<Meal> getMeals() {
+		return meals;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMeals(List<Meal> meals) {
+		this.meals = meals;
 	}
 	public BigDecimal getRate() {
 		return rate;
@@ -121,5 +129,11 @@ public class Cafe {
 	}
 	public void setClose(OpenClose close) {
 		this.close = close;
+	}
+	public List<ua.entity.Table> getTables() {
+		return tables;
+	}
+	public void setTables(List<ua.entity.Table> tables) {
+		this.tables = tables;
 	}
 }
