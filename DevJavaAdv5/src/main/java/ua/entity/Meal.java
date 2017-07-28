@@ -1,21 +1,18 @@
 package ua.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="meal")
-public class Meal {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+public class Meal extends AbstractEntity{
 	
 	private String photoUrl;
 	
@@ -32,14 +29,21 @@ public class Meal {
 	private BigDecimal price;
 	
 	private int weight;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Cuisine cuisine;
 	
-	public Integer getId() {
-		return id;
+	@ManyToMany(mappedBy="meals")
+	private List<Order> orders = new ArrayList<>();
+	
+	@ManyToMany
+	private List<Component> components = new ArrayList<>();
+	
+	public List<Order> getOrders() {
+		return orders;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 	public String getPhotoUrl() {
 		return photoUrl;

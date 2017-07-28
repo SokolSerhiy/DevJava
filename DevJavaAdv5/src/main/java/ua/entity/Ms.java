@@ -8,20 +8,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cuisine")
-public class Cuisine extends AbstractEntity{
-	
+@Table(name="ms")
+public class Ms extends AbstractEntity{
+
 	private String name;
 	
-	@OneToMany(mappedBy="cuisine")
-	private List<Meal> meals = new ArrayList<>();
-	
-	public Cuisine(String name) {
-		this.name = name;
-	}
-
-	public Cuisine() {
-	}
+	@OneToMany(mappedBy="ms")
+	private List<Component> components = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -29,5 +22,13 @@ public class Cuisine extends AbstractEntity{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Component> getComponents() {
+		return components;
+	}
+
+	public void setComponents(List<Component> components) {
+		this.components = components;
 	}
 }
