@@ -1,6 +1,8 @@
 package ua.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.Persistence;
 import ua.entity.Cafe;
 import ua.entity.OpenClose;
 import ua.entity.Type;
+import ua.model.view.CafeView;
 
 public class Main {
 
@@ -33,14 +36,23 @@ public class Main {
 //		cafe.setType(Type.CAFE);
 //		em.persist(cafe);
 		
-		List<Cafe> list = em.createQuery("FROM Cafe c WHERE c.name=?24", Cafe.class)
-				.setParameter(24, "Addada")
+//		List<Cafe> list = em.createQuery("FROM Cafe c WHERE c.name=?24", Cafe.class)
+//				.setParameter(24, "Addada")
+//				.getResultList();
+//		for (Cafe cafe : list) {
+//			System.out.println(cafe.getOpen().getTime());
+//		}
+		List<Cafe> cafes = em.createQuery("SELECT c FROM Cafe c JOIN FETCH c.open o JOIN FETCH c.close WHERE o.time = ?1 AND c.tables IS NOT EMPTY", Cafe.class)
+				.setParameter(1, LocalTime.of(12, 0))
 				.getResultList();
-		for (Cafe cafe : list) {
-			System.out.println(cafe.getOpen().getTime());
-		}
+		List<CafeView> views = em.createQuery("SELECT new ua.model.view.CafeView(c.id, c.rate, c.name, c.photoUrl, c.version, c.address, c.fullDescription, c.type, c.phone, c.email, open.time, close.time) FROM Cafe c JOIN c.open open JOIN c.close close WHERE open.time = ?1", CafeView.class)
+				.setParameter(1, LocalTime.of(12, 0))
+				.getResultList();
 		em.getTransaction().commit();
 		em.close();
+		"SELECT c.name FROM Cuisine c".length();
+		cafes.forEach(c->System.out.println(c.getOpen().getTime()));
+		views.forEach(System.out::println);
 		factory.close();
 	}
 }
