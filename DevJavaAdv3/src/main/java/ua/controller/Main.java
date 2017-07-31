@@ -2,6 +2,7 @@ package ua.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import ua.entity.City;
 import ua.entity.Model;
 import ua.entity.Status;
 import ua.entity.Transporter;
+import ua.model.view.TransporterView;
 
 public class Main {
 
@@ -39,14 +41,26 @@ public class Main {
 //		transporter.setName("Mykola");
 //		manager.persist(transporter);
 		
-		List<Cargo> list = manager.createQuery("FROM Cargo c WHERE c.price > ?1", Cargo.class)
-		.setParameter(1, new BigDecimal("200"))
-		.getResultList();
-		for (Cargo cargo : list) {
-			System.out.println(cargo.getGoods().getName());
-		}
+//		List<Cargo> list = manager.createQuery("FROM Cargo c WHERE c.price > ?1", Cargo.class)
+//		.setParameter(1, new BigDecimal("200"))
+//		.getResultList();
+//		for (Cargo cargo : list) {
+//			System.out.println(cargo.getGoods().getName());
+//		}
+		List<Transporter> list1 = new ArrayList<>();
+		List<TransporterView> list2 = new ArrayList<>();
+		Transporter transporter = manager.createQuery("SELECT t FROM Transporter t JOIN FETCH t.brand JOIN FETCH t.model JOIN t.cityArrive c WHERE c.name=?1", Transporter.class)
+				.setParameter(1, "Lviv")
+				.getSingleResult();
+		TransporterView view = manager.createQuery("SELECT new ua.model.view.TransporterView(t.id, t.rate, t.maxWeight, t.photoUrl, t.version, t.name, t.count, t.age, t.phone, b.name, m.name, t.carAge, c.name, t.dateArrive, t.status) FROM Transporter t JOIN t.brand b JOIN t.model m JOIN t.cityArrive c WHERE c.name=?1", TransporterView.class)
+				.setParameter(1, "Lviv")
+				.getSingleResult();
+		"SELECT b.name FROM Brand b".length();
 		manager.getTransaction().commit();
 		manager.close();
+		System.out.println(transporter.getBrand().getName());
+		System.out.println(transporter.getModel().getName());
+		System.out.println(view);
 		factory.close();
 	}
 }
