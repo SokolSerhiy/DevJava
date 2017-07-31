@@ -24,6 +24,18 @@ public class MealView {
 	private int weight;
 	
 	private String cuisine;
+	
+	public MealView(Integer id, String photoUrl, int version, BigDecimal rate, String name, String fullDescription, BigDecimal price, int weight, String cuisine) {
+		this.id = id;
+		this.photoUrl = photoUrl;
+		this.version = version;
+		this.rate = rate;
+		this.name = name;
+		this.fullDescription = fullDescription;
+		this.price = price;
+		this.weight = weight;
+		this.cuisine = cuisine;
+	}
 
 	public Integer getId() {
 		return id;
@@ -103,5 +115,12 @@ public class MealView {
 
 	public void setCuisine(String cuisine) {
 		this.cuisine = cuisine;
+	}
+
+	@Override
+	public String toString() {
+		return "MealView [id=" + id + ", photoUrl=" + photoUrl + ", version=" + version + ", rate=" + rate + ", name="
+				+ name + ", fullDescription=" + fullDescription + ", price=" + price + ", components=" + components
+				+ ", weight=" + weight + ", cuisine=" + cuisine + "]";
 	}
 }
