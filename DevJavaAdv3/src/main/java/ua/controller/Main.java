@@ -3,12 +3,19 @@ package ua.controller;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import ua.entity.Brand;
 import ua.entity.Cargo;
@@ -47,20 +54,49 @@ public class Main {
 //		for (Cargo cargo : list) {
 //			System.out.println(cargo.getGoods().getName());
 //		}
-		List<Transporter> list1 = new ArrayList<>();
-		List<TransporterView> list2 = new ArrayList<>();
-		Transporter transporter = manager.createQuery("SELECT t FROM Transporter t JOIN FETCH t.brand JOIN FETCH t.model JOIN t.cityArrive c WHERE c.name=?1", Transporter.class)
-				.setParameter(1, "Lviv")
-				.getSingleResult();
-		TransporterView view = manager.createQuery("SELECT new ua.model.view.TransporterView(t.id, t.rate, t.maxWeight, t.photoUrl, t.version, t.name, t.count, t.age, t.phone, b.name, m.name, t.carAge, c.name, t.dateArrive, t.status) FROM Transporter t JOIN t.brand b JOIN t.model m JOIN t.cityArrive c WHERE c.name=?1", TransporterView.class)
-				.setParameter(1, "Lviv")
-				.getSingleResult();
-		"SELECT b.name FROM Brand b".length();
+//		List<Transporter> list1 = new ArrayList<>();
+//		List<TransporterView> list2 = new ArrayList<>();
+//		Transporter transporter = manager.createQuery("SELECT t FROM Transporter t JOIN FETCH t.brand JOIN FETCH t.model JOIN t.cityArrive c WHERE c.name=?1", Transporter.class)
+//				.setParameter(1, "Lviv")
+//				.getSingleResult();
+//		TransporterView view = manager.createQuery("SELECT new ua.model.view.TransporterView(t.id, t.rate, t.maxWeight, t.photoUrl, t.version, t.name, t.count, t.age, t.phone, b.name, m.name, t.carAge, c.name, t.dateArrive, t.status) FROM Transporter t JOIN t.brand b JOIN t.model m JOIN t.cityArrive c WHERE c.name=?1", TransporterView.class)
+//				.setParameter(1, "Lviv")
+//				.getSingleResult();
+//		"SELECT b.name FROM Brand b".length();
+		
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<TransporterView> cq = cb.createQuery(TransporterView.class);
+		Root<Transporter> root = cq.from(Transporter.class);
+		Join<Transporter, Brand> brandJoin = root.join("brand");
+		Join<Transporter, Model> modelJoin = root.join("model");
+		Join<Transporter, City> cityJoin = root.join("cityArrive");
+//t.id, t.rate, t.maxWeight, t.photoUrl, t.version, t.name, t.count, t.age, t.phone, b.name, m.name, t.carAge, c.name, t.dateArrive, t.status
+		cq.multiselect(root.get("id"), root.get("rate"), 
+			root.get("maxWeight"), 
+			root.get("photoUrl"), 
+			root.get("version"),
+			root.get("name"),
+			root.get("count"),
+			root.get("age"),
+			root.get("phone"),
+			brandJoin.get("name"),
+			modelJoin.get("name"),
+			root.get("carAge"),
+			cityJoin.get("name"),
+			root.get("dateArrive"),
+			root.get("status"));
+		Predicate ratePredicate = cb.ge(root.get("rate"), new BigDecimal("4"));
+		Predicate agePredicate = cb.between(root.get("age"), 25, 45);
+		Predicate namePredicate = cb.like(root.get("name"), "A%");
+		Predicate brandPredicate = cb.equal(brandJoin.get("name"), "Renault");
+		Predicate modelPredicate = modelJoin.get("name").in(Arrays.asList("Premium", "Super car"));
+//		root.fetch("model");
+		Predicate all = cb.and(ratePredicate, agePredicate, namePredicate, brandPredicate, modelPredicate);
+		cq.where(all);
+		List<TransporterView> transporters=manager.createQuery(cq).getResultList();
+		System.out.println(transporters);
 		manager.getTransaction().commit();
 		manager.close();
-		System.out.println(transporter.getBrand().getName());
-		System.out.println(transporter.getModel().getName());
-		System.out.println(view);
 		factory.close();
 	}
 }
