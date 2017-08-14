@@ -9,7 +9,24 @@
 <title>Cuisine</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container">.
+		<div class="row">
+			<div class="col-12">
+				<form action="/admin/cuisine" method="POST">
+					<div class="form-group row">
+						<label class="col-2 col-form-label" for="name">Name:</label>
+						<div class="col-10">
+							<input class="form-control" id="name" name="name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-10 mr-left">
+							<button class="btn btn-sm btn-outline-success">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-12">
 				<table class="table table-bordered">

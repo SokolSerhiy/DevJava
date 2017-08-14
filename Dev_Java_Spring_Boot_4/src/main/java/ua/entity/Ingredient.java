@@ -9,20 +9,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ingredient")
-public class Ingredient extends AbstractEntity{
+public class Ingredient extends AbstractEntityName{
 
-	private String name;
-	
 	@ManyToMany(mappedBy="ingredients")
 	private List<Meal> meals = new ArrayList<>();
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public List<Meal> getMeals() {
 		return meals;
