@@ -10,6 +10,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ingredient")
 public class Ingredient extends AbstractEntityName{
+	
+	public Ingredient() {
+	}
+	
+	public Ingredient(String name) {
+		super(name);
+	}
 
 	@OneToMany(mappedBy="ingredient")
 	private List<Component> components = new ArrayList<>();

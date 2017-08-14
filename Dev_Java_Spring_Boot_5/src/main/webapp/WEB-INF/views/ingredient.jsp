@@ -12,6 +12,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+				<form action="/admin/ingredient" method="POST">
+					<div class="form-group row">
+						<label class="col-2 col-form-label" for="name">Name:</label>
+						<div class="col-10">
+							<input class="form-control" id="name" name="name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-8 mr-auto">
+							<button class="btn btn-sm btn-outline-success">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
 				<table class="table table-bordered">
 					<tr>
 						<th class="text-center">Name</th>
