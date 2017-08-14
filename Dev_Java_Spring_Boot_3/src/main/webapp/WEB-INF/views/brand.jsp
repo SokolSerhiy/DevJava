@@ -12,6 +12,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+				<form action="/admin/brand" method="POST">
+					<div class="form-group row">
+						<label class="col-2 col-form-label">Name:</label>
+						<div class="col-10">
+							<input name="name" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-10 offset-sm-2">
+        					<button type="submit" class="btn btn-outline-success btn-sm">Save</button>
+      					</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
 				<table class="table table-bordered">
 					<tr>
 						<th class="text-center">Name</th>
