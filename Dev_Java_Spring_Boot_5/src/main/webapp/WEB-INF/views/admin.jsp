@@ -9,5 +9,6 @@
 <body>
 	<h2>Admin</h2>
 	<a href="/admin/ingredient">Ingredient</a>
+	<a href="/admin/component">Component</a>
 </body>
 </html>

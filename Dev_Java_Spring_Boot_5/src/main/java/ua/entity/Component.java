@@ -13,6 +13,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name="component")
 public class Component extends AbstractEntity{
+	
+	public Component(Ingredient ingredient, BigDecimal amount, Ms ms) {
+		this.ingredient = ingredient;
+		this.amount = amount;
+		this.ms = ms;
+	}
+
+	public Component() {
+	}
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Ingredient ingredient;
