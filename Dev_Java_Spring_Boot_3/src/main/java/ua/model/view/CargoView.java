@@ -2,7 +2,7 @@ package ua.model.view;
 
 import java.math.BigDecimal;
 
-public class СargoView {
+public class CargoView {
 
 	private Integer id;
 	
@@ -23,6 +23,18 @@ public class СargoView {
 	private String owner;
 	
 	private BigDecimal price;
+	
+	public CargoView(Integer id, String goods, int weight, int height, int width, int length, String cityFrom, String cityTo, BigDecimal price) {
+		this.id = id;
+		this.goods = goods;
+		this.weight = weight;
+		this.height = height;
+		this.width = width;
+		this.length = length;
+		this.cityFrom = cityFrom;
+		this.cityTo = cityTo;
+		this.price = price;
+	}
 
 	public Integer getId() {
 		return id;

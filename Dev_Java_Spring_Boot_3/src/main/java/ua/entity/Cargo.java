@@ -11,6 +11,21 @@ import javax.persistence.Table;
 @Table(name="cargo")
 public class Cargo extends AbstractEntity{
 
+	public Cargo() {
+	}
+
+	public Cargo(Goods goods, int weight, int height, int width, int length, City cityFrom, City cityTo,
+			BigDecimal price) {
+		this.goods = goods;
+		this.weight = weight;
+		this.height = height;
+		this.width = width;
+		this.length = length;
+		this.cityFrom = cityFrom;
+		this.cityTo = cityTo;
+		this.price = price;
+	}
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Goods goods;
 	

@@ -8,5 +8,6 @@
 </head>
 <body>
 	<a href="/admin/brand">Brand</a>
+	<a href="/admin/cargo">Cargo</a>
 </body>
 </html>
