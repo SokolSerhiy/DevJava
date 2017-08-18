@@ -21,7 +21,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-10 offset-sm-2">
+						<div class="col-10 ml-auto">
         					<button type="submit" class="btn btn-outline-success btn-sm">Save</button>
         					<a href="/admin/brand/cancel" class="btn btn-outline-warning btn-sm">Cancel</a>
       					</div>
