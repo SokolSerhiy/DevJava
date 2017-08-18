@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Cuisine extends AbstractEntityName{
 	
 	public Cuisine() {
+		System.out.println("Constructor");
 	}
 	
 	public Cuisine(String name) {
