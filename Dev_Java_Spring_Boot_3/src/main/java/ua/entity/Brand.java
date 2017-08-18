@@ -12,12 +12,20 @@ import javax.persistence.Table;
 public class Brand extends AbstractEntityName{
 
 	@OneToMany(mappedBy="brand")
-	private List<Transporter> transporters = new ArrayList<>();
+	private List<Model> models = new ArrayList<>();
 
 	public Brand(String name) {
 		super(name);
 	}
 
 	public Brand() {
+	}
+
+	public List<Model> getModels() {
+		return models;
+	}
+
+	public void setModels(List<Model> models) {
+		this.models = models;
 	}
 }

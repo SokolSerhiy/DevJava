@@ -29,8 +29,6 @@ public class Transporter extends AbstractEntityName{
 	@Column(length=13)
 	private String phone;
 	@ManyToOne(fetch=FetchType.LAZY)
-	private Brand brand;
-	@ManyToOne(fetch=FetchType.LAZY)
 	private Model model;
 	
 	private int carAge;
@@ -82,12 +80,6 @@ public class Transporter extends AbstractEntityName{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public Brand getBrand() {
-		return brand;
-	}
-	public void setBrand(Brand brand) {
-		this.brand = brand;
 	}
 	public Model getModel() {
 		return model;
