@@ -47,11 +47,6 @@
 					<div class="form-group row">
 						<label class="col-2 col-form-label" for="ingredients">Ingredients:</label>
 						<div class="col-10">
-<%-- 							<form:select path="ingredients"> --%>
-<%-- 								<c:forEach var="ingredient" items="${ingredients}"> --%>
-<%-- 									<form:option value="${ingredient}">${ingredient}</form:option> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
 							<form:select path="ingredients" items="${ingredients}" class="form-control" multiple="multiple"/>
 						</div>
 					</div>
