@@ -9,4 +9,5 @@ public class DevJavaSpringBoot3Application {
 	public static void main(String[] args) {
 		SpringApplication.run(DevJavaSpringBoot3Application.class, args);
 	}
+	
 }
