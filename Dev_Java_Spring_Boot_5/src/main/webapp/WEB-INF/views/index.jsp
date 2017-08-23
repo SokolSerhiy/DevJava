@@ -9,5 +9,7 @@
 <body>
 	<h2>${message}</h2>
 	<a href="/admin">Admin</a>
+	<a href="/registration">Registration</a>
+	<a href="/login">Login</a>
 </body>
 </html>
