@@ -36,13 +36,14 @@ public class Cafe extends AbstractEntityName{
 	@Column(length=13)
 	private String phone;
 	
-	private String email;
-	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose open;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private OpenClose close;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private User user;
 	
 	@OneToMany(mappedBy="cafe")
 	private List<ua.entity.Table> tables = new ArrayList<>();
@@ -103,12 +104,6 @@ public class Cafe extends AbstractEntityName{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public OpenClose getOpen() {
 		return open;
