@@ -1,39 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <title>Login</title>
 </head>
 <body>
 <div class="container">
 	<div class="row">
-		<form:form action="/login" method="POST">
-			<div class="form-group row">
-				<label class="form-col-label col-2" for="email">Email:</label>
-				<div class="col-10">
-					<input name="login" id="email" class="form-control"/>
-				</div>
+		<c:if test="${param.fail}">
+			<div class="col-12 text-center" style="color:red;">
+				Fail to authorize
 			</div>
-			<div class="form-group row">
-				<label class="form-col-label col-2" for="password">Password:</label>
-				<div class="col-10">
-					<input type="password" name="password" id="password" class="form-control"/>
+		</c:if>
+		<div class="col-12">
+			<form:form action="/login" method="POST">
+				<div class="form-group row">
+					<label class="form-col-label col-2" for="email">Email:</label>
+					<div class="col-10">
+						<input name="login" id="email" class="form-control"/>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-10">
-					<label><input type="checkbox" name="rememberMe"> Remember me</label>
+				<div class="form-group row">
+					<label class="form-col-label col-2" for="password">Password:</label>
+					<div class="col-10">
+						<input type="password" name="password" id="password" class="form-control"/>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-10 ml-auto">
-					<button class="btn btn-outline-success btn-sm">Sign in</button>
+				<div class="form-group row">
+					<div class="col-10">
+						<label><input type="checkbox" name="rememberMe"> Remember me</label>
+					</div>
 				</div>
-			</div>
-		</form:form>
+				<div class="form-group row">
+					<div class="col-10 ml-auto">
+						<button class="btn btn-outline-success btn-sm">Sign in</button>
+					</div>
+				</div>
+			</form:form>
+		</div>
 	</div>
 </div>
 </body>
