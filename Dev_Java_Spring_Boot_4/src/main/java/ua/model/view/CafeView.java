@@ -3,6 +3,8 @@ package ua.model.view;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import ua.entity.Type;
 
@@ -32,6 +34,8 @@ public class CafeView {
 	
 	private String close;
 	
+	private List<MealView> meals = new ArrayList<>();
+	
 	public CafeView(Integer id, BigDecimal rate, String name, String photoUrl, int version, String address,String fullDescription, Type type, String phone, String email, LocalTime open, LocalTime close) {
 		this.id = id;
 		this.rate = rate;
@@ -45,6 +49,14 @@ public class CafeView {
 		this.email = email;
 		this.open = open.format(DateTimeFormatter.ofPattern("HH:mm"));
 		this.close = close.format(DateTimeFormatter.ofPattern("HH:mm"));
+	}
+	
+	public List<MealView> getMeals() {
+		return meals;
+	}
+
+	public void setMeals(List<MealView> meals) {
+		this.meals = meals;
 	}
 
 	public Integer getId() {

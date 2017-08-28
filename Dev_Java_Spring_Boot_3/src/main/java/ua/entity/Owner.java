@@ -23,16 +23,16 @@ public class Owner extends AbstractEntityName{
 	@OneToOne
 	private User user;
 	
+	@OneToMany(mappedBy="owner")
+	private List<Cargo> cargos = new ArrayList<>();
+	
 	public User getUser() {
 		return user;
 	}
-
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	@OneToMany(mappedBy="owner")
-	private List<Cargo> cargos = new ArrayList<>();
 
 	public String getPhone() {
 		return phone;

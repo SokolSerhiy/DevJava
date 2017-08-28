@@ -1,6 +1,7 @@
 package ua.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class AdminBrandController {
 	@GetMapping
 	public String show(Model model) {
 		model.addAttribute("brands", service.findAll());
+//		SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next().getAuthority()
 		return "brand";
 	}
 	
