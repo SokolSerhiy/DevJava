@@ -15,6 +15,11 @@
 			<div class="col-12">
 				<form:form action="/admin/brand" method="POST" modelAttribute="brand">
 					<div class="form-group row">
+						<div class="col-10 ml-auto">
+							<form:errors path="name"/>
+						</div>
+					</div>
+					<div class="form-group row">
 						<label class="col-2 col-form-label">Name:</label>
 						<div class="col-10">
 							<form:input path="name" class="form-control"/>
