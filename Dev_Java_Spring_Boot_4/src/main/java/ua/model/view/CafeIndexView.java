@@ -19,6 +19,10 @@ public class CafeIndexView {
 	private String shortDescription;
 	
 	private String type;
+	
+	public String getPrint() {
+		return name+" "+address;
+	}
 
 	public Integer getId() {
 		return id;

@@ -14,9 +14,9 @@ public class User extends AbstractEntity{
 	private String password;
 	
 	private Role role;
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user", orphanRemoval=true, cascade=CascadeType.PERSIST)
 	private Owner owner;
-	@OneToOne(mappedBy="user", cascade=CascadeType.PERSIST)
+	@OneToOne(mappedBy="user", orphanRemoval=true, cascade=CascadeType.PERSIST)
 	private Transporter transporter;
 	
 	public String getEmail() {
