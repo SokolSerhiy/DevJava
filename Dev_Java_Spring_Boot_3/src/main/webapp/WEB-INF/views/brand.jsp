@@ -15,7 +15,7 @@
 			<div class="col-12">
 				<form:form action="/admin/brand" method="POST" modelAttribute="brand">
 					<div class="form-group row">
-						<div class="col-10 ml-auto">
+						<div class="col-10 ml-auto" style="color:red;">
 							<form:errors path="name"/>
 						</div>
 					</div>
