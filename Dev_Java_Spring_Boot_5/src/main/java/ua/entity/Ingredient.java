@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ingredient")
+@Table(name="ingredient", indexes=@Index(columnList = "name", unique=true))
 public class Ingredient extends AbstractEntityName{
 	
 	public Ingredient() {
