@@ -1,6 +1,8 @@
 package ua.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,8 +37,8 @@ public class AdminIngredientController {
 	}
 	
 	@GetMapping
-	public String show(Model model) {
-		model.addAttribute("ingredients", service.findAll());
+	public String show(Model model, @PageableDefault Pageable pageable) {
+		model.addAttribute("ingredients", service.findAll(pageable));
 		return "ingredient";
 	}
 	
@@ -47,16 +49,16 @@ public class AdminIngredientController {
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("ingredient") @Validated(IngredientFlag.class) Ingredient ingredient, BindingResult br, Model model, SessionStatus status) {
-		if(br.hasErrors()) return show(model);
+	public String save(@ModelAttribute("ingredient") @Validated(IngredientFlag.class) Ingredient ingredient, BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable) {
+		if(br.hasErrors()) return show(model, pageable);
 		service.save(ingredient);
 		return cancel(status);
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Integer id, Model model) {
+	public String update(@PathVariable Integer id, Model model, @PageableDefault Pageable pageable) {
 		model.addAttribute("ingredient", service.findOne(id));
-		return show(model);
+		return show(model, pageable);
 	}
 	
 	@GetMapping("/cancel")
