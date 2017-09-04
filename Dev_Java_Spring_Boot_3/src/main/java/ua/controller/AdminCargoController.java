@@ -1,6 +1,8 @@
 package ua.controller;
 
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,8 @@ public class AdminCargoController {
 	}
 	
 	@GetMapping
-	public String show(Model model){
-		model.addAttribute("cargos", service.findAllView());
+	public String show(Model model, @PageableDefault Pageable pageable){
+		model.addAttribute("cargos", service.findAllView(pageable));
 		model.addAttribute("cities", service.findAllCity());
 		model.addAttribute("goodss", service.findAllGoods());
 		return "cargo";
@@ -51,9 +53,9 @@ public class AdminCargoController {
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Integer id, Model model) {
+	public String update(@PathVariable Integer id, Model model,  @PageableDefault Pageable pageable) {
 		model.addAttribute("cargo", service.findOne(id));
-		return show(model);
+		return show(model, pageable);
 	}
 	
 	@GetMapping("/cancel")

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib>
+  <tlib-version>1.1</tlib-version>
+  <jsp-version>2.2</jsp-version>
+  <short-name>Pageable TLD</short-name>
+  <tag>
+    <name>pageable</name>
+    <tag-class>ua.tag.PageableTag</tag-class>
+    <body-content>empty</body-content>
+     <attribute>
+      <name>page</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>org.springframework.data.domain.Page</type>
+     </attribute>
+     <attribute>
+      <name>container</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+      </attribute>
+     <attribute>
+      <name>cell</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+   	 </attribute>
+  </tag>
+</taglib>
