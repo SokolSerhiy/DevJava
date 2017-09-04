@@ -1,8 +1,8 @@
 package ua.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +37,8 @@ public class AdminCuisineController {
 	}
 	
 	@GetMapping
-	public String show(Model model) {
-		model.addAttribute("cuisines", service.findAll());
+	public String show(Model model, @PageableDefault Pageable pageable) {
+		model.addAttribute("cuisines", service.findAll(pageable));
 		return "cuisine";
 	}
 	
@@ -49,16 +49,16 @@ public class AdminCuisineController {
 	}
 	
 	@PostMapping
-	public String save(@ModelAttribute("cuisine") @Validated(CuisineFlag.class) Cuisine cuisine, BindingResult br, Model model, SessionStatus status) {
-		if(br.hasErrors()) return show(model);
+	public String save(@ModelAttribute("cuisine") @Validated(CuisineFlag.class) Cuisine cuisine, BindingResult br, Model model, SessionStatus status, @PageableDefault Pageable pageable) {
+		if(br.hasErrors()) return show(model, pageable);
 		service.save(cuisine);
 		return cancel(status);
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable Integer id, Model model) {
+	public String update(@PathVariable Integer id, Model model, @PageableDefault Pageable pageable) {
 		model.addAttribute("cuisine", service.findOne(id));
-		return show(model);
+		return show(model, pageable);
 	}
 	
 	@GetMapping("/cancel")

@@ -106,7 +106,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-xs-12 text-center">
-				<custom:pageable page="${cargos}" cell="<li class='page-item'></li>" container="<ul class='pagination'></ul>" />
+				<custom:pageable page="${cargos}"/>
 			</div>
 		</div>
 	</div>
