@@ -31,7 +31,7 @@ public class PageableTag extends SimpleTagSupport{
 	
 	private int size;
 	
-	private String stContainer = "<ul class='pagination'>";
+	private String stContainer = "<ul class='pagination justify-content-center pagination-sm'>";
 	private String endContainer = "</ul>";
 	private String stCell = "<li class='page-item'>";
 	private String endCell = "</li>";
