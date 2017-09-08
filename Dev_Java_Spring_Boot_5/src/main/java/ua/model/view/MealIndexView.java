@@ -15,6 +15,15 @@ public class MealIndexView {
 	private String name;
 	
 	private String shortDescription;
+	
+	public MealIndexView(Integer id, String photoUrl, int version, BigDecimal rate, String name, String shortDescription) {
+		this.id = id;
+		this.photoUrl = photoUrl;
+		this.version = version;
+		this.rate = rate;
+		this.name = name;
+		this.shortDescription = shortDescription;
+	}
 
 	public Integer getId() {
 		return id;
