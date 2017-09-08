@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.entity.Brand;
-import ua.filter.SimpleFilter;
+import ua.model.filter.SimpleFilter;
 
 public interface BrandService extends CrudService<Brand, Integer>{
 

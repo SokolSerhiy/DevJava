@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Brand;
-import ua.filter.SimpleFilter;
+import ua.model.filter.SimpleFilter;
 import ua.repository.BrandRepository;
 import ua.service.BrandService;
 

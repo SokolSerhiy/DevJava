@@ -1,4 +1,4 @@
-package ua.filter;
+package ua.model.filter;
 
 public class SimpleFilter {
 

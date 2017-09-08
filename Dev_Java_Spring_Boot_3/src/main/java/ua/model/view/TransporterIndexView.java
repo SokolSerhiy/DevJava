@@ -17,6 +17,16 @@ public class TransporterIndexView {
 	private String name;
 	
 	private int count;
+	
+	public TransporterIndexView(Integer id, BigDecimal rate, int maxWeight, String photoUrl, int version, String name, int count) {
+		this.id = id;
+		this.rate = rate;
+		this.maxWeight = maxWeight;
+		this.photoUrl = photoUrl;
+		this.version = version;
+		this.name = name;
+		this.count = count;
+	}
 
 	public Integer getId() {
 		return id;

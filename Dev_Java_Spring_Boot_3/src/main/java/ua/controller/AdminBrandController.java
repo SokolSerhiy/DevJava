@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import ua.entity.Brand;
-import ua.filter.SimpleFilter;
+import ua.model.filter.SimpleFilter;
 import ua.service.BrandService;
 
 @Controller
