@@ -2,6 +2,8 @@ package ua.model.view;
 
 import java.math.BigDecimal;
 
+import ua.entity.Type;
+
 public class CafeIndexView {
 
 	private Integer id;
@@ -20,6 +22,17 @@ public class CafeIndexView {
 	
 	private String type;
 	
+	public CafeIndexView(Integer id, BigDecimal rate, String name, String photoUrl, int version, String address, String shortDescription, Type type) {
+		this.id = id;
+		this.rate = rate;
+		this.name = name;
+		this.photoUrl = photoUrl;
+		this.version = version;
+		this.address = address;
+		this.shortDescription = shortDescription;
+		this.type = type.name();
+	}
+
 	public String getPrint() {
 		return name+" "+address;
 	}
