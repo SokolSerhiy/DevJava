@@ -6,12 +6,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="component")
+@Table(name="component",indexes=@Index(columnList = "amount"))
 public class Component extends AbstractEntity{
 	
 	public Component(Ingredient ingredient, BigDecimal amount, Ms ms) {
