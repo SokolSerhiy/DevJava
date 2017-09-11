@@ -26,6 +26,11 @@
 			<button>Logout</button>
 		</form:form>
 	</sec:authorize>
+	<img src="/img/15621957_1847273372210538_2662072775391491197_n.jpg?version=${version}">
+	<form:form action="/" method="POST" modelAttribute="fileRequest" enctype="multipart/form-data">
+		<input name="file" type="file">
+		<button>Ok</button>
+	</form:form>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
