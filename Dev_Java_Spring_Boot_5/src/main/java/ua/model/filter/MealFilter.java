@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class MealFilter {
 
-	private static final Pattern INT_PATTERN = Pattern.compile("[0-9]{1,10}^$");
+	private static final Pattern INT_PATTERN = Pattern.compile("^[0-9]{1,10}$");
 	
 	private static final Pattern DECIMAL_PATTERN = Pattern.compile("^([0-9]{1,18}\\.[0-9]{0,2})|([0-9]{1,18}\\,[0-9]{0,2})|([0-9]{1,18})$");
 	
