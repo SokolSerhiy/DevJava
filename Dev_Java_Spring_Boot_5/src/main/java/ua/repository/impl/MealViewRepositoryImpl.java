@@ -42,7 +42,7 @@ public class MealViewRepositoryImpl implements MealViewRepository{
 		if(predicate!=null) cq.where(predicate);
 		cq.orderBy(toOrders(pageable.getSort(), root, cb));
 		List<MealIndexView> content = em.createQuery(cq)
-				.setFirstResult(pageable.getPageNumber())
+				.setFirstResult(pageable.getPageNumber()*pageable.getPageSize())
 				.setMaxResults(pageable.getPageSize())
 				.getResultList();
 		CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
