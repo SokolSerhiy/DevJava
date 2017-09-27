@@ -50,9 +50,9 @@ public class CafeViewRepositoryImpl implements CafeViewRepository{
 		CriteriaQuery<Long> cqCount = cb.createQuery(Long.class);
 		Root<Cafe> rootCount = cqCount.from(Cafe.class);
 		cqCount.select(cb.count(rootCount));
-		PredicateBuilder builderCount = new PredicateBuilder(filter, cb, root);
+		PredicateBuilder builderCount = new PredicateBuilder(filter, cb, rootCount);
 		Predicate predicateCount = builderCount.toPredicate();
-		if(predicate!=null) cqCount.where(predicateCount);
+		if(predicateCount!=null) cqCount.where(predicateCount);
 		return PageableExecutionUtils.getPage(content, pageable, ()->em.createQuery(cqCount).getSingleResult());
 	}
 	
